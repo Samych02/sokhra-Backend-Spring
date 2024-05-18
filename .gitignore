@@ -33,3 +33,4 @@ build/
 .vscode/
 
 /src/main/resources/firebase-adminsdk.json
+/src/main/resources/static
