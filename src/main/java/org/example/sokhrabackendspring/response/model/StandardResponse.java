@@ -12,7 +12,7 @@ public class StandardResponse {
   @Builder
   public static class SuccessResponse<T> {
     private String status;
-    private String message;
+    private String statusText;
     private T data;
   }
 
@@ -22,6 +22,6 @@ public class StandardResponse {
   @Builder
   public static class ErrorResponse {
     private String status;
-    private String errorMessage;
+    private String statusText;
   }
 }

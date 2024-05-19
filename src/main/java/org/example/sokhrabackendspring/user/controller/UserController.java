@@ -55,7 +55,7 @@ public class UserController {
             .body(
                     ResponseUtil.successResponse(
                             "User created successfully",
-                            null
+                            Collections.singletonMap("created", true)
                     )
             );
   }
