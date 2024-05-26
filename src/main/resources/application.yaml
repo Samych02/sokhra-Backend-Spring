@@ -20,7 +20,6 @@ spring:
         format_sql: true
     hibernate:
       ddl-auto: update
-    show-sql: false
 
   servlet:
     multipart:
@@ -29,4 +28,5 @@ spring:
       max-request-size: 10MB
 
 profile-picture-directory: /Users/samy/Documents/Projects/sokhra-UsersResources/profile-picture/
+request-picture-directory: /Users/samy/Documents/Projects/sokhra-UsersResources/request-picture/
 

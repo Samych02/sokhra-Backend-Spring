@@ -25,4 +25,8 @@ public class User {
   private String lastName;
 
   private String profilePicture;
+
+  public User(String uid) {
+    this.uid = uid;
+  }
 }

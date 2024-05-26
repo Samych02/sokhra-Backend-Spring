@@ -1,7 +1,7 @@
-package org.example.sokhrabackendspring.response.controller.advice;
+package org.example.sokhrabackendspring.requestresponse.controller.advice;
 
-import org.example.sokhrabackendspring.response.model.StandardResponse;
-import org.example.sokhrabackendspring.response.util.ResponseUtil;
+import org.example.sokhrabackendspring.requestresponse.model.StandardResponse;
+import org.example.sokhrabackendspring.requestresponse.util.ResponseUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
