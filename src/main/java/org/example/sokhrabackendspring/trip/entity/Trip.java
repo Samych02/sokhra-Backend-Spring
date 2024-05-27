@@ -1,36 +1,35 @@
 package org.example.sokhrabackendspring.trip.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.example.sokhrabackendspring.shipment.entity.Request;
+import lombok.*;
+import org.example.sokhrabackendspring.common.entity.BaseEntity;
+import org.example.sokhrabackendspring.shipment.entity.Shipment;
 import org.example.sokhrabackendspring.trip.model.Place;
 import org.example.sokhrabackendspring.trip.model.TripStatus;
 import org.example.sokhrabackendspring.user.entity.User;
-import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.sql.Date;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "trips")
-public class Trip {
-  @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID id;
-
-  @ManyToOne(fetch = FetchType.LAZY)
+@EntityListeners(AuditingEntityListener.class)
+public class Trip extends BaseEntity {
+  @ManyToOne
   @JoinColumn(nullable = false)
   private User traveller;
+
+  @OneToMany(mappedBy = "trip", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @JsonManagedReference
+  private List<Shipment> shipments = new ArrayList<>();
 
   @Embedded
   @AttributeOverrides({
@@ -46,19 +45,13 @@ public class Trip {
   })
   private Place destination;
 
-  private Date departureDate;
+  private LocalDate departureDate;
 
   private double maxWeight;
 
-  private int price;
-
-  @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  private List<Request> requests = new ArrayList<>();
+  private Integer price;
 
   @Enumerated(EnumType.STRING)
   private TripStatus status;
 
-  @CreatedDate
-  @Column(name = "created_at")
-  private LocalDateTime createdAt;
 }

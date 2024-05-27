@@ -1,29 +1,28 @@
 package org.example.sokhrabackendspring.trip.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.sokhrabackendspring.shipment.entity.Request;
-import org.example.sokhrabackendspring.shipment.model.RequestStatus;
 import org.example.sokhrabackendspring.trip.dto.TripDTO;
 import org.example.sokhrabackendspring.trip.entity.Trip;
-import org.example.sokhrabackendspring.trip.exceptions.CantEditTrip;
 import org.example.sokhrabackendspring.trip.exceptions.TripNotFoundException;
 import org.example.sokhrabackendspring.trip.model.TripStatus;
 import org.example.sokhrabackendspring.trip.repository.TripRepository;
 import org.example.sokhrabackendspring.user.entity.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
+
+import static org.example.sokhrabackendspring.trip.repository.TripSpecification.getTripsByParams;
 
 @Service
 @RequiredArgsConstructor
 public class TripService {
   private final TripRepository tripRepository;
-
-  public List<Trip> getAllTrips() {
-    return tripRepository.findAll();
-  }
 
   public Trip getTripById(UUID id) {
     return tripRepository.findById(id).orElse(null);
@@ -43,11 +42,16 @@ public class TripService {
     tripRepository.save(trip);
   }
 
-  public double getAvailableWeight(UUID id) throws Exception {
-    Trip trip = getTripById(id);
-    if (trip == null) throw new TripNotFoundException();
-    double allocatedWeight = trip.getRequests().stream().filter(r -> r.getStatus() == RequestStatus.ACCEPTED).mapToDouble(Request::getWeight).sum();
-    return trip.getMaxWeight() - allocatedWeight;
+  public Double getAvailableWeight(UUID id) throws Exception {
+    System.out.println(11);
+    System.out.println(tripRepository.findAll());
+    return 0.0;
+//    System.out.println(trip);
+//    System.out.println(22);
+//    if (trip == null) throw new TripNotFoundException();
+//    System.out.println(33);
+//    double allocatedWeight = trip.getShipments().stream().filter(r -> r.getStatus() == RequestStatus.ACCEPTED).mapToDouble(Shipment::getWeight).sum();
+//    return trip.getMaxWeight() - allocatedWeight;
   }
 
   public boolean canAcceptTrip(UUID id, double requestedWeight) throws Exception {
@@ -56,32 +60,40 @@ public class TripService {
     return getAvailableWeight(id) >= requestedWeight;
   }
 
+  public Page<Trip> getTripsPaginated(TripDTO.getTripsDTO getTripsDTO) {
+    Pageable pageable = PageRequest.of(getTripsDTO.getPage(), getTripsDTO.getSize(), Sort.by("createdAt").descending());
+    Specification<Trip> specification = getTripsByParams(getTripsDTO);
+    System.out.println(69);
+    System.out.println(tripRepository.findAll(specification));
+    return tripRepository.findAll(specification, pageable);
+  }
+
   // Freely editing a trip is the ability to totally edit a trip weight and price tp any value
   // This is only allowed when there is no accepted request to the trip
   // Origin, destination and departure date are in no way editable
-  public boolean canFreelyEdit(UUID id) throws Exception {
-    Trip trip = getTripById(id);
-    if (trip == null) throw new TripNotFoundException();
-    return trip.getRequests().stream().anyMatch(r -> r.getStatus() == RequestStatus.ACCEPTED);
-  }
+//  public boolean canFreelyEdit(UUID id) throws Exception {
+//    Trip trip = getTripById(id);
+//    if (trip == null) throw new TripNotFoundException();
+//    return trip.getShipments().stream().anyMatch(r -> r.getStatus() == RequestStatus.ACCEPTED);
+//  }
 
   //@PreAuthorize("tripRepository.findById(#id).orElse(null)?.traveller?.getUid == principal.username")
-  public void editWeight(UUID id, double weight) throws Exception {
-    Trip trip = getTripById(id);
-    if (trip == null) throw new TripNotFoundException();
-    if (!canFreelyEdit(id)) throw new CantEditTrip();
-    trip.setMaxWeight(weight);
-    tripRepository.save(trip);
-  }
+//  public void editWeight(UUID id, Double weight) throws Exception {
+//    Trip trip = getTripById(id);
+//    if (trip == null) throw new TripNotFoundException();
+//    if (!canFreelyEdit(id)) throw new CantEditTrip();
+//    trip.setMaxWeight(weight);
+//    tripRepository.save(trip);
+//  }
 
-  //  @PreAuthorize("tripRepository.findById(#id).orElse(null)?.traveller?.getUid == principal.username")
-  public void editPrice(UUID id, int price) throws Exception {
-    Trip trip = getTripById(id);
-    // todo: change weight when not freely
-    if (trip == null) throw new TripNotFoundException();
-    if (!canFreelyEdit(id)) throw new CantEditTrip();
-    trip.setPrice(price);
-    tripRepository.save(trip);
-  }
+//  //  @PreAuthorize("tripRepository.findById(#id).orElse(null)?.traveller?.getUid == principal.username")
+//  public void editPrice(UUID id, Integer price) throws Exception {
+//    Trip trip = getTripById(id);
+//    // todo: change weight when not freely
+//    if (trip == null) throw new TripNotFoundException();
+//    if (!canFreelyEdit(id)) throw new CantEditTrip();
+//    trip.setPrice(price);
+//    tripRepository.save(trip);
+//  }
 
 }

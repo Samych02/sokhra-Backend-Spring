@@ -21,7 +21,7 @@ public class UserService {
 
 
   public Boolean shouldRegister(Jwt token) {
-    return !userRepository.existsByUid(token.getClaim("user_id"));
+    return !userRepository.existsById(token.getClaim("user_id"));
   }
 
   public void registerUser(Jwt token, UserDTO.RegistrationDTO registrationDTO)
@@ -30,12 +30,12 @@ public class UserService {
     String phoneNumber = token.getClaim("phone_number");
     User user = User
             .builder()
-            .uid(uid)
+            .id(uid)
             .phoneNumber(phoneNumber)
             .firstName(registrationDTO.getFirstName())
             .lastName(registrationDTO.getLastName())
             .profilePicture(
-                    uid + "." + Objects.requireNonNull(registrationDTO.getProfilePicture().getOriginalFilename()).split("\\.")[1]
+                    uid + "." + Objects.requireNonNull(registrationDTO.getProfilePicture().getOriginalFilename()).split("\\.")[1].toLowerCase()
             )
             .build();
     saveProfilePicture(registrationDTO.getProfilePicture(), user.getProfilePicture());

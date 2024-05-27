@@ -1,36 +1,23 @@
-package org.example.sokhrabackendspring.user.entity;
+package org.example.sokhrabackendspring.common.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
-@Data
-@EqualsAndHashCode(callSuper = false)
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity
-@Table(name = "users")
-@Builder
+@Getter
+@Setter
+@MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class User {
+public class BaseEntity {
   @Id
-  private String id;
-
-  private String phoneNumber;
-
-  private String firstName;
-
-  private String lastName;
-
-  private String profilePicture;
-
-  public User(String id) {
-    this.id = id;
-  }
+  @GeneratedValue(strategy = GenerationType.UUID)
+  private UUID id;
 
   @CreatedDate
   @Column(name = "created_at")

@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import org.example.sokhrabackendspring.trip.model.Place;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class TripDTO {
   @Data
@@ -18,13 +18,34 @@ public class TripDTO {
     private Place destination;
 
     @NotBlank
-    private Date departureDate;
+    private LocalDate departureDate;
 
     @NotBlank
-    private double weight;
+    private Double weight;
 
     @NotBlank
-    private int price;
+    private Integer price;
+
+  }
+
+  @Data
+  @Builder
+  public static class getTripsDTO {
+    @NotBlank
+    private Integer page;
+
+    @NotBlank
+    private Integer size;
+
+    private Place origin;
+
+    private Place destination;
+
+    private LocalDate departureDate;
+
+    private Double weight;
+
+    private Integer price;
 
   }
 }

@@ -1,12 +1,10 @@
 package org.example.sokhrabackendspring.trip.model;
 
 import jakarta.persistence.Embeddable;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @Data
+@EqualsAndHashCode
 @AllArgsConstructor
 @ToString
 @NoArgsConstructor
