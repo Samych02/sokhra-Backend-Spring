@@ -1,27 +1,70 @@
 package org.example.sokhrabackendspring.shipment.service;
 
-import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
+import org.example.sokhrabackendspring.imageutility.service.ImageService;
+import org.example.sokhrabackendspring.shipment.dto.ShipmentDTO;
 import org.example.sokhrabackendspring.shipment.entity.Shipment;
+import org.example.sokhrabackendspring.shipment.exception.ExceedsAvailableWeight;
+import org.example.sokhrabackendspring.shipment.model.ShipmentStatus;
 import org.example.sokhrabackendspring.shipment.repository.ShipmentRepository;
+import org.example.sokhrabackendspring.trip.entity.Trip;
+import org.example.sokhrabackendspring.trip.service.TripService;
+import org.example.sokhrabackendspring.user.entity.User;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
+import java.io.IOException;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
 public class ShipmentService {
   private final ShipmentRepository shipmentRepository;
+  private final ImageService imageService;
+  private final TripService tripService;
 
-  public List<Shipment> getAllShipments() {
-    return shipmentRepository.findAll();
+  public ShipmentService(ShipmentRepository shipmentRepository, @Qualifier("shipmentImageService") ImageService imageService, TripService tripService) {
+    this.shipmentRepository = shipmentRepository;
+    this.imageService = imageService;
+    this.tripService = tripService;
   }
 
-  public Shipment getShipmentById(UUID id) {
-    return shipmentRepository.findById(id).orElse(null);
+  public byte[] getShipmentPicture(UUID id) throws IOException {
+    String shipmentPicture = shipmentRepository.getShipmentPictureById(id);
+    return imageService.loadImage(shipmentPicture);
   }
 
-  public Shipment saveShipment(Shipment shipment) {
-    return shipmentRepository.save(shipment);
+  public void saveShipmentPicture(MultipartFile shipmentPicture, String id) throws IOException {
+    imageService.saveImage(shipmentPicture, id);
   }
+
+  public Shipment getShipmentById(UUID shipmentId) {
+    return shipmentRepository.findById(shipmentId).orElse(null);
+  }
+
+  @SneakyThrows
+  public void addShipment(Jwt token, ShipmentDTO.addShipmentDTO addShipmentDTO) {
+    if (!tripService.canAcceptTrip(addShipmentDTO.getTripID(), addShipmentDTO.getWeight()))
+      throw new ExceedsAvailableWeight();
+    User sender = new User(token.getClaim("user_id"));
+    Trip trip = new Trip(addShipmentDTO.getTripID());
+
+    Shipment shipment = Shipment.builder()
+            .sender(sender)
+            .trip(trip)
+            .title(addShipmentDTO.getTitle())
+            .note(addShipmentDTO.getNote())
+            .weight(addShipmentDTO.getWeight())
+            .shipmentPicture(
+                    UUID.randomUUID().toString() + "." + Objects.requireNonNull(addShipmentDTO.getShipmentPicture().getOriginalFilename()).split("\\.")[1].toLowerCase()
+            )
+            .status(ShipmentStatus.PENDING)
+            .build();
+    saveShipmentPicture(addShipmentDTO.getShipmentPicture(), shipment.getShipmentPicture());
+    shipmentRepository.save(shipment);
+  }
+
+
 }

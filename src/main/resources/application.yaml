@@ -29,5 +29,5 @@ spring:
       max-request-size: 10MB
 
 profile-picture-directory: /Users/samy/Documents/Projects/sokhra-UsersResources/profile-picture/
-request-picture-directory: /Users/samy/Documents/Projects/sokhra-UsersResources/request-picture/
+shipment-picture-directory: /Users/samy/Documents/Projects/sokhra-UsersResources/shipment-picture/
 

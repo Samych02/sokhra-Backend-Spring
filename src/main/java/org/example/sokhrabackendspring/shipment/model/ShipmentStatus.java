@@ -1,6 +1,7 @@
 package org.example.sokhrabackendspring.shipment.model;
 
-public enum RequestStatus {
+public enum ShipmentStatus {
+  PENDING,
   ACCEPTED,
   REJECTED,
   DELIVERED,

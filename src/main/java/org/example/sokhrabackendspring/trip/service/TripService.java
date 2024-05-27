@@ -1,9 +1,11 @@
 package org.example.sokhrabackendspring.trip.service;
 
 import lombok.RequiredArgsConstructor;
+import org.example.sokhrabackendspring.shipment.entity.Shipment;
+import org.example.sokhrabackendspring.shipment.model.ShipmentStatus;
 import org.example.sokhrabackendspring.trip.dto.TripDTO;
 import org.example.sokhrabackendspring.trip.entity.Trip;
-import org.example.sokhrabackendspring.trip.exceptions.TripNotFoundException;
+import org.example.sokhrabackendspring.trip.exception.TripNotFoundException;
 import org.example.sokhrabackendspring.trip.model.TripStatus;
 import org.example.sokhrabackendspring.trip.repository.TripRepository;
 import org.example.sokhrabackendspring.user.entity.User;
@@ -37,24 +39,22 @@ public class TripService {
             .destination(addTripDTO.getDestination())
             .maxWeight(addTripDTO.getWeight())
             .price(addTripDTO.getPrice())
+            .departureDate(addTripDTO.getDepartureDate())
             .status(TripStatus.ACTIVE)
             .build();
     tripRepository.save(trip);
   }
 
-  public Double getAvailableWeight(UUID id) throws Exception {
-    System.out.println(11);
-    System.out.println(tripRepository.findAll());
-    return 0.0;
-//    System.out.println(trip);
-//    System.out.println(22);
-//    if (trip == null) throw new TripNotFoundException();
-//    System.out.println(33);
-//    double allocatedWeight = trip.getShipments().stream().filter(r -> r.getStatus() == RequestStatus.ACCEPTED).mapToDouble(Shipment::getWeight).sum();
-//    return trip.getMaxWeight() - allocatedWeight;
+  public Integer getAvailableWeight(UUID id) throws Exception {
+    Trip trip = getTripById(id);
+    if (trip == null) throw new TripNotFoundException();
+    Integer allocatedWeight = trip.getShipments().stream()
+            .filter(r -> r.getStatus() == ShipmentStatus.ACCEPTED || r.getStatus() == ShipmentStatus.PENDING)
+            .mapToInt(Shipment::getWeight).sum();
+    return trip.getMaxWeight() - allocatedWeight;
   }
 
-  public boolean canAcceptTrip(UUID id, double requestedWeight) throws Exception {
+  public boolean canAcceptTrip(UUID id, Integer requestedWeight) throws Exception {
     Trip trip = getTripById(id);
     if (trip == null) throw new TripNotFoundException();
     return getAvailableWeight(id) >= requestedWeight;

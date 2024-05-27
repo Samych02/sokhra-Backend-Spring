@@ -1,36 +1,33 @@
-package org.example.sokhrabackendspring.trip.dto;
+package org.example.sokhrabackendspring.shipment.dto;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Builder;
 import lombok.Data;
 import org.example.sokhrabackendspring.trip.model.Place;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
-public class TripDTO {
+public class ShipmentDTO {
   @Data
   @Builder
-  public static class addTripDTO {
+  public static class addShipmentDTO {
     @NotEmpty
-    private Place origin;
+    private UUID tripID;
 
     @NotEmpty
-    private Place destination;
-
-    @NotEmpty
-    @DateTimeFormat
-    private LocalDate departureDate;
-
-    @NotEmpty
-    @Min(0)
+    @Min(1)
     private Integer weight;
 
     @NotEmpty
-    @Min(0)
-    private Integer price;
+    private String title;
 
+    private String note;
+
+    @NotEmpty
+    private MultipartFile shipmentPicture;
   }
 
   @Data
@@ -46,13 +43,10 @@ public class TripDTO {
 
     private Place destination;
 
-    @DateTimeFormat
     private LocalDate departureDate;
 
-    @Min(1)
-    private Integer weight;
+    private Double weight;
 
-    @Min(0)
     private Integer price;
 
   }

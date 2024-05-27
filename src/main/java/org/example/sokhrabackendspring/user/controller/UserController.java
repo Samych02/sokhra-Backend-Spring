@@ -45,10 +45,10 @@ public class UserController {
             );
   }
 
-  @GetMapping(value = "user/profile/image/{uid}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
-  public ResponseEntity<?> getProfilePicture(@PathVariable String uid) throws IOException {
+  @GetMapping(value = "user/profile/image/{id}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
+  public ResponseEntity<?> getProfilePicture(@PathVariable String id) throws IOException {
     return ResponseEntity.ok(
-            userService.getProfilePicture(uid)
+            userService.getProfilePicture(id)
     );
   }
 }

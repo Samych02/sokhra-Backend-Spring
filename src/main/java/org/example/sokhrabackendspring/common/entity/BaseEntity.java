@@ -1,8 +1,8 @@
 package org.example.sokhrabackendspring.common.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -10,8 +10,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
@@ -26,4 +26,8 @@ public class BaseEntity {
   @LastModifiedDate
   @Column(name = "updated_at")
   protected LocalDateTime updatedAt;
+
+  public BaseEntity(UUID id) {
+    this.id = id;
+  }
 }

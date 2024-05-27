@@ -1,4 +1,4 @@
-package org.example.sokhrabackendspring.trip.exceptions;
+package org.example.sokhrabackendspring.trip.exception;
 
 public class CantEditTrip extends Exception {
   public CantEditTrip() {

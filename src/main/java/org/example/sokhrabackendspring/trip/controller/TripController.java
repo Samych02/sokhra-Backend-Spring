@@ -54,8 +54,7 @@ public class TripController {
   }
 
   @GetMapping("/test")
-  public Double test(@RequestBody TripDTO.getTripsDTO getTripsDTO) throws Exception {
-    return tripService.getAvailableWeight(UUID.fromString("c4ef9fc6-f3d7-44b2-bf8f-d6a722a0e9ff"));
-
+  public ResponseEntity<?> test() throws Exception {
+    return ResponseEntity.ok(tripService.canAcceptTrip(UUID.fromString("851cd0a1-6d60-42dc-ab8a-a1e6470e98a1"), 21));
   }
 }

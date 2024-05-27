@@ -2,15 +2,15 @@ package org.example.sokhrabackendspring.shipment.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import org.example.sokhrabackendspring.common.entity.BaseEntity;
-import org.example.sokhrabackendspring.shipment.model.RequestStatus;
+import org.example.sokhrabackendspring.shipment.model.ShipmentStatus;
 import org.example.sokhrabackendspring.trip.entity.Trip;
 import org.example.sokhrabackendspring.user.entity.User;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -29,22 +29,34 @@ public class Shipment extends BaseEntity {
   @JsonBackReference
   private Trip trip;
 
-  @NotEmpty
   private String title;
 
   private String note;
 
-  @NotEmpty
-  private Double weight;
+  private Integer weight;
 
-  @NotEmpty
   private String shipmentPicture;
 
   @Enumerated(EnumType.STRING)
-  private RequestStatus status;
+  private ShipmentStatus status;
 
   @CreatedDate
   @Column(name = "created_at")
   private LocalDateTime createdAt;
 
+  public Shipment(UUID id) {
+    super(id);
+  }
+
+  public Shipment(UUID id, User sender, Trip trip, String title, String note, Integer weight, String shipmentPicture, ShipmentStatus status, LocalDateTime createdAt) {
+    super(id);
+    this.sender = sender;
+    this.trip = trip;
+    this.title = title;
+    this.note = note;
+    this.weight = weight;
+    this.shipmentPicture = shipmentPicture;
+    this.status = status;
+    this.createdAt = createdAt;
+  }
 }
