@@ -7,6 +7,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface UserRepository extends JpaRepository<User, String> {
   @Query("SELECT profilePicture FROM User WHERE id = :id")
-  String getProfilePictureByUd(@Param("id") String id);
+  String getProfilePictureById(@Param("id") String id);
 
 }

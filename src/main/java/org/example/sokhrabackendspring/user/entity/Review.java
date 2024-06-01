@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.example.sokhrabackendspring.common.entity.BaseEntity;
 
+import java.util.UUID;
+
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
@@ -14,13 +16,25 @@ import org.example.sokhrabackendspring.common.entity.BaseEntity;
 public class Review extends BaseEntity {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(nullable = false)
-  private User reviewer;
+  private User caster;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(nullable = false)
   private User reviewed;
 
-  private int rating;
+  private Integer rating;
 
   private String comment;
+
+  public Review(UUID id) {
+    super(id);
+  }
+
+  public Review(UUID id, User reviewer, User reviewed, Integer rating, String comment) {
+    super(id);
+    this.caster = reviewer;
+    this.reviewed = reviewed;
+    this.rating = rating;
+    this.comment = comment;
+  }
 }

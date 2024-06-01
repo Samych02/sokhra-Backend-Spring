@@ -1,5 +1,7 @@
 package org.example.sokhrabackendspring.user.controller;
 
+import jakarta.annotation.security.PermitAll;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.sokhrabackendspring.requestresponse.util.ResponseUtil;
 import org.example.sokhrabackendspring.user.dto.UserDTO;
@@ -32,7 +34,7 @@ public class UserController {
 
   @PostMapping("/user/register")
   public ResponseEntity<?> register(@AuthenticationPrincipal Jwt token,
-                                    @ModelAttribute UserDTO.RegistrationDTO registrationDTO)
+                                    @ModelAttribute @Valid UserDTO.RegistrationDTO registrationDTO)
           throws IOException {
     userService.registerUser(token, registrationDTO);
     return ResponseEntity
@@ -45,6 +47,7 @@ public class UserController {
             );
   }
 
+  @PermitAll
   @GetMapping(value = "user/profile/image/{id}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
   public ResponseEntity<?> getProfilePicture(@PathVariable String id) throws IOException {
     return ResponseEntity.ok(

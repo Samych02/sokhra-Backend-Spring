@@ -1,5 +1,6 @@
 package org.example.sokhrabackendspring.shipment.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.sokhrabackendspring.requestresponse.util.ResponseUtil;
 import org.example.sokhrabackendspring.shipment.dto.ShipmentDTO;
@@ -22,7 +23,7 @@ public class ShipmentController {
 
   @PostMapping("/shipment/add")
   public ResponseEntity<?> addShipment(@AuthenticationPrincipal Jwt token,
-                                       @ModelAttribute ShipmentDTO.addShipmentDTO addShipmentDTO)
+                                       @ModelAttribute @Valid ShipmentDTO.AddShipmentDTO addShipmentDTO)
           throws IOException {
     System.out.println(addShipmentDTO);
     shipmentService.addShipment(token, addShipmentDTO);

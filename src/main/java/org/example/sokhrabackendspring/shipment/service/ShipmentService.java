@@ -1,10 +1,10 @@
 package org.example.sokhrabackendspring.shipment.service;
 
 import lombok.SneakyThrows;
+import org.apache.commons.io.FilenameUtils;
 import org.example.sokhrabackendspring.imageutility.service.ImageService;
 import org.example.sokhrabackendspring.shipment.dto.ShipmentDTO;
 import org.example.sokhrabackendspring.shipment.entity.Shipment;
-import org.example.sokhrabackendspring.shipment.exception.ExceedsAvailableWeight;
 import org.example.sokhrabackendspring.shipment.model.ShipmentStatus;
 import org.example.sokhrabackendspring.shipment.repository.ShipmentRepository;
 import org.example.sokhrabackendspring.trip.entity.Trip;
@@ -45,9 +45,9 @@ public class ShipmentService {
   }
 
   @SneakyThrows
-  public void addShipment(Jwt token, ShipmentDTO.addShipmentDTO addShipmentDTO) {
-    if (!tripService.canAcceptTrip(addShipmentDTO.getTripID(), addShipmentDTO.getWeight()))
-      throw new ExceedsAvailableWeight();
+  public void addShipment(Jwt token, ShipmentDTO.AddShipmentDTO addShipmentDTO) {
+//    if (!tripService.canAcceptTrip(addShipmentDTO.getTripID(), addShipmentDTO.getWeight()))
+//      throw new ExceedsAvailableWeight();
     User sender = new User(token.getClaim("user_id"));
     Trip trip = new Trip(addShipmentDTO.getTripID());
 
@@ -58,7 +58,7 @@ public class ShipmentService {
             .note(addShipmentDTO.getNote())
             .weight(addShipmentDTO.getWeight())
             .shipmentPicture(
-                    UUID.randomUUID().toString() + "." + Objects.requireNonNull(addShipmentDTO.getShipmentPicture().getOriginalFilename()).split("\\.")[1].toLowerCase()
+                    UUID.randomUUID().toString() + "." + Objects.requireNonNull(FilenameUtils.getExtension(addShipmentDTO.getShipmentPicture().getOriginalFilename())).toLowerCase()
             )
             .status(ShipmentStatus.PENDING)
             .build();

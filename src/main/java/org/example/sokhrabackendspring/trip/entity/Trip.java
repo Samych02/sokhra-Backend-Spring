@@ -59,4 +59,15 @@ public class Trip extends BaseEntity {
     super(id);
   }
 
+  public Trip(UUID id, User traveller, List<Shipment> shipments, Place origin, Place destination, LocalDate departureDate, Integer maxWeight, Integer price, TripStatus status) {
+    super(id);
+    this.traveller = traveller;
+    this.shipments = shipments;
+    this.origin = origin;
+    this.destination = destination;
+    this.departureDate = departureDate;
+    this.maxWeight = maxWeight;
+    this.price = price;
+    this.status = status;
+  }
 }

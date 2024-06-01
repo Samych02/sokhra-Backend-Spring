@@ -1,5 +1,6 @@
 package org.example.sokhrabackendspring.user.service;
 
+import org.apache.commons.io.FilenameUtils;
 import org.example.sokhrabackendspring.imageutility.service.ImageService;
 import org.example.sokhrabackendspring.user.dto.UserDTO;
 import org.example.sokhrabackendspring.user.entity.User;
@@ -37,7 +38,7 @@ public class UserService {
             .firstName(registrationDTO.getFirstName())
             .lastName(registrationDTO.getLastName())
             .profilePicture(
-                    uid + "." + Objects.requireNonNull(registrationDTO.getProfilePicture().getOriginalFilename()).split("\\.")[1].toLowerCase()
+                    uid + "." + Objects.requireNonNull(FilenameUtils.getExtension(registrationDTO.getProfilePicture().getOriginalFilename())).toLowerCase()
             )
             .build();
     saveProfilePicture(registrationDTO.getProfilePicture(), user.getProfilePicture());
@@ -45,7 +46,7 @@ public class UserService {
   }
 
   public byte[] getProfilePicture(String id) throws IOException {
-    String profilePicture = userRepository.getProfilePictureByUd(id);
+    String profilePicture = userRepository.getProfilePictureById(id);
     return imageService.loadImage(profilePicture);
   }
 
