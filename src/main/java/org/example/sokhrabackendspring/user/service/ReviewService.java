@@ -6,6 +6,7 @@ import org.example.sokhrabackendspring.user.entity.Review;
 import org.example.sokhrabackendspring.user.entity.User;
 import org.example.sokhrabackendspring.user.model.Rating;
 import org.example.sokhrabackendspring.user.repository.ReviewRepository;
+import org.example.sokhrabackendspring.user.repository.projection.ReviewProjection;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +34,7 @@ public class ReviewService {
     return new Rating(ratingValue, numberOfRatings);
   }
 
-  public List<Review> getAllUserReviews(String userId) {
-    return reviewRepository.findByReviewedId(userId);
+  public List<ReviewProjection> getAllUserReviews(String userId) {
+    return reviewRepository.findAllProjectedByReviewedId(userId);
   }
 }

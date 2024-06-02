@@ -36,4 +36,6 @@ public interface TripRepository extends JpaRepository<Trip, UUID>, JpaSpecificat
                                  @Param("weight") Integer weight,
                                  @Param("status") TripStatus status,
                                  Pageable pageable);
+
+  Integer countAllByTravellerIdAndStatus(String id, TripStatus status);
 }

@@ -1,6 +1,5 @@
 package org.example.sokhrabackendspring.user.controller;
 
-import jakarta.annotation.security.PermitAll;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.sokhrabackendspring.requestresponse.util.ResponseUtil;
@@ -47,11 +46,22 @@ public class UserController {
             );
   }
 
-  @PermitAll
   @GetMapping(value = "user/profile/image/{id}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
   public ResponseEntity<?> getProfilePicture(@PathVariable String id) throws IOException {
     return ResponseEntity.ok(
             userService.getProfilePicture(id)
     );
+  }
+
+  @GetMapping(value = "/user/profile")
+  public ResponseEntity<?> getProfile(@RequestParam String id) {
+    return ResponseEntity
+            .status(HttpStatus.CREATED)
+            .body(
+                    ResponseUtil.successResponse(
+                            "User profile fetched successfully",
+                            Collections.singletonMap("profile", userService.getUserProfile(id))
+                    )
+            );
   }
 }

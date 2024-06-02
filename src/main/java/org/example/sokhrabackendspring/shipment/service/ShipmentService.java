@@ -23,12 +23,10 @@ import java.util.UUID;
 public class ShipmentService {
   private final ShipmentRepository shipmentRepository;
   private final ImageService imageService;
-  private final TripService tripService;
 
   public ShipmentService(ShipmentRepository shipmentRepository, @Qualifier("shipmentImageService") ImageService imageService, TripService tripService) {
     this.shipmentRepository = shipmentRepository;
     this.imageService = imageService;
-    this.tripService = tripService;
   }
 
   public byte[] getShipmentPicture(UUID id) throws IOException {
@@ -51,20 +49,12 @@ public class ShipmentService {
     User sender = new User(token.getClaim("user_id"));
     Trip trip = new Trip(addShipmentDTO.getTripID());
 
-    Shipment shipment = Shipment.builder()
-            .sender(sender)
-            .trip(trip)
-            .title(addShipmentDTO.getTitle())
-            .note(addShipmentDTO.getNote())
-            .weight(addShipmentDTO.getWeight())
-            .shipmentPicture(
-                    UUID.randomUUID().toString() + "." + Objects.requireNonNull(FilenameUtils.getExtension(addShipmentDTO.getShipmentPicture().getOriginalFilename())).toLowerCase()
-            )
-            .status(ShipmentStatus.PENDING)
-            .build();
+    Shipment shipment = Shipment.builder().sender(sender).trip(trip).title(addShipmentDTO.getTitle()).note(addShipmentDTO.getNote()).weight(addShipmentDTO.getWeight()).shipmentPicture(UUID.randomUUID().toString() + "." + Objects.requireNonNull(FilenameUtils.getExtension(addShipmentDTO.getShipmentPicture().getOriginalFilename())).toLowerCase()).status(ShipmentStatus.PENDING).build();
     saveShipmentPicture(addShipmentDTO.getShipmentPicture(), shipment.getShipmentPicture());
     shipmentRepository.save(shipment);
   }
 
-
+  public Integer getShipmentsCountByUserId(String id) {
+    return shipmentRepository.countAllBySenderIdAndStatus(id, ShipmentStatus.DELIVERED);
+  }
 }

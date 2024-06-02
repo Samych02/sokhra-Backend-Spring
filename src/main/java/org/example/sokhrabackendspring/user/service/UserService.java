@@ -5,6 +5,7 @@ import org.example.sokhrabackendspring.imageutility.service.ImageService;
 import org.example.sokhrabackendspring.user.dto.UserDTO;
 import org.example.sokhrabackendspring.user.entity.User;
 import org.example.sokhrabackendspring.user.repository.UserRepository;
+import org.example.sokhrabackendspring.user.repository.projection.UserProfileProjection;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
@@ -52,6 +53,10 @@ public class UserService {
 
   public void saveProfilePicture(MultipartFile profilePicture, String id) throws IOException {
     imageService.saveImage(profilePicture, id);
+  }
+
+  public UserProfileProjection getUserProfile(String id) {
+    return userRepository.findUserProjectedById(id);
   }
 
 

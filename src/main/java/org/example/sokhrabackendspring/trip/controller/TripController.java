@@ -55,9 +55,6 @@ public class TripController {
             .departureDate(departureDate)
             .weight(weight)
             .build();
-    System.out.println(getTripsDTO);
-    System.out.println(getTripsDTO.areAllFieldsNull());
-
     Page<TripProjection> tripPage = tripService.getTripsPaginated(page, size, getTripsDTO);
     return ResponseEntity
             .status(HttpStatus.OK)
@@ -67,13 +64,5 @@ public class TripController {
                             Collections.singletonMap("tripPage", tripPage)
                     )
             );
-
   }
-//
-//  @GetMapping("/test")
-//  public ResponseEntity<?> test() throws Exception {
-//    TripDTO.GetTripsDTO g = TripDTO.GetTripsDTO.builder()
-//            .page(0).size(5).build();
-//    return ResponseEntity.ok(tripService.getAllTrips());
-//  }
 }

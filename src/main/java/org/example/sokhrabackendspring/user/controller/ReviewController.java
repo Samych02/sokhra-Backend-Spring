@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.sokhrabackendspring.requestresponse.util.ResponseUtil;
 import org.example.sokhrabackendspring.user.dto.ReviewDTO;
-import org.example.sokhrabackendspring.user.model.Rating;
+import org.example.sokhrabackendspring.user.repository.projection.ReviewProjection;
 import org.example.sokhrabackendspring.user.service.ReviewService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -36,7 +37,7 @@ public class ReviewController {
   }
 
   @GetMapping("/reviewtest")
-  public Rating tt() {
-    return reviewService.getRating("rTIe73R3oTghqkAbPTsczzf0dop1");
+  public List<ReviewProjection> tt() {
+    return reviewService.getAllUserReviews("u2");
   }
 }

@@ -1,6 +1,7 @@
 package org.example.sokhrabackendspring.shipment.repository;
 
 import org.example.sokhrabackendspring.shipment.entity.Shipment;
+import org.example.sokhrabackendspring.shipment.model.ShipmentStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,4 +13,6 @@ import java.util.UUID;
 public interface ShipmentRepository extends JpaRepository<Shipment, UUID> {
   @Query("SELECT shipmentPicture FROM Shipment WHERE id = :id")
   String getShipmentPictureById(@Param("id") UUID id);
+
+  Integer countAllBySenderIdAndStatus(String id, ShipmentStatus status);
 }

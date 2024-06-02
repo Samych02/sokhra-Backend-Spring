@@ -33,7 +33,6 @@ public class TripService {
 
   public void addTrip(Jwt token, TripDTO.AddTripDTO addTripDTO) {
     User traveller = new User(token.getClaim("user_id"));
-
     Trip trip = Trip.builder()
             .traveller(traveller)
             .origin(addTripDTO.getOrigin())
@@ -64,18 +63,10 @@ public class TripService {
   public Page<TripProjection> getTripsPaginated(int page, int size, TripDTO.GetTripsDTO getTripsDTO) {
     Pageable pageable;
     if (getTripsDTO == null || getTripsDTO.areAllFieldsNull()) {
-      System.out.println(6969);
       pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
       return tripRepository.findAllByStatus(TripStatus.ACTIVE, pageable);
     }
     pageable = PageRequest.of(page, size, Sort.by("price").ascending());
-//    getTripsDTO.parse();
-//    if (getTripsDTO.getDepartureDate() == null)
-//      return tripRepository.findAllByOriginAndDestination(getTripsDTO, pageable).stream()
-//              .filter(tripProjection -> tripProjection.getAvailableWeight() >= getTripsDTO.getWeight()).collect(Collectors.collectingAndThen(Collectors.toList(),
-//                      list -> new PageImpl<>(list, pageable, list.size())));
-//
-//    return tripRepository.findAllByOriginAndDestinationAndDepartureDate(getTripsDTO, pageable);
     return tripRepository.findAllBy((getTripsDTO.getOrigin().getCity() == null) ? null : getTripsDTO.getOrigin().getCity().toLowerCase(), (getTripsDTO.getOrigin().getCity() == null) ? null : getTripsDTO.getOrigin().getCountry().toLowerCase(),
             (getTripsDTO.getDestination().getCity() == null) ? null : getTripsDTO.getDestination().getCity().toLowerCase(), (getTripsDTO.getDestination().getCity() == null) ? null : getTripsDTO.getDestination().getCountry().toLowerCase(),
             (getTripsDTO.getDepartureDate() == null) ? null : getTripsDTO.getDepartureDate(),
@@ -84,10 +75,9 @@ public class TripService {
             pageable);
   }
 
-//  public Page<Trip> getTripsPaginated(int page, int size, TripDTO.GetTripsDTO getTripsDTO) {
-//    Pageable pageable = PageRequest.of(getTripsDTO.getPage(), getTripsDTO.getSize());
-//    return tripRepository.findAll(pageable);
-//  }
+  public Integer getTripsCountByUserId(String id) {
+    return tripRepository.countAllByTravellerIdAndStatus(id, TripStatus.COMPLETED);
+  }
 
 // Freely editing a trip is the ability to totally edit a trip weight and price tp any value
 // This is only allowed when there is no accepted request to the trip

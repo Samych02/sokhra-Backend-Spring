@@ -1,12 +1,9 @@
 package org.example.sokhrabackendspring.user.repository.projection;
 
-public interface UserProjection {
+public interface ReviewerProjection {
   String getId();
 
   String getFirstName();
 
   String getProfilePicture();
-
-//  @Value("#{@reviewService.getRating(target.id)}")
-//  Rating getRating();
 }
