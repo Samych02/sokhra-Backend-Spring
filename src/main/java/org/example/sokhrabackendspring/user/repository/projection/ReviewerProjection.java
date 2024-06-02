@@ -4,6 +4,4 @@ public interface ReviewerProjection {
   String getId();
 
   String getFirstName();
-
-  String getProfilePicture();
 }

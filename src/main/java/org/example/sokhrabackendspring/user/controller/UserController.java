@@ -54,13 +54,13 @@ public class UserController {
   }
 
   @GetMapping(value = "/user/profile")
-  public ResponseEntity<?> getProfile(@RequestParam String id) {
+  public ResponseEntity<?> getProfile(@AuthenticationPrincipal Jwt token, @RequestParam(required = false) String id) {
     return ResponseEntity
             .status(HttpStatus.CREATED)
             .body(
                     ResponseUtil.successResponse(
                             "User profile fetched successfully",
-                            Collections.singletonMap("profile", userService.getUserProfile(id))
+                            Collections.singletonMap("profile", userService.getUserProfile((id == null || id.isEmpty()) ? token.getClaim("user_id") : id))
                     )
             );
   }
