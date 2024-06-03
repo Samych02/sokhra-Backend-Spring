@@ -1,15 +1,15 @@
-package org.example.sokhrabackendspring.shipment.service;
+package me.Sokhra.sokhrabackendspring.shipment.service;
 
 import lombok.SneakyThrows;
+import me.Sokhra.sokhrabackendspring.imageutility.service.ImageService;
+import me.Sokhra.sokhrabackendspring.shipment.dto.ShipmentDTO;
+import me.Sokhra.sokhrabackendspring.shipment.entity.Shipment;
+import me.Sokhra.sokhrabackendspring.shipment.model.ShipmentStatus;
+import me.Sokhra.sokhrabackendspring.shipment.repository.ShipmentRepository;
+import me.Sokhra.sokhrabackendspring.trip.entity.Trip;
+import me.Sokhra.sokhrabackendspring.trip.service.TripService;
+import me.Sokhra.sokhrabackendspring.user.entity.User;
 import org.apache.commons.io.FilenameUtils;
-import org.example.sokhrabackendspring.imageutility.service.ImageService;
-import org.example.sokhrabackendspring.shipment.dto.ShipmentDTO;
-import org.example.sokhrabackendspring.shipment.entity.Shipment;
-import org.example.sokhrabackendspring.shipment.model.ShipmentStatus;
-import org.example.sokhrabackendspring.shipment.repository.ShipmentRepository;
-import org.example.sokhrabackendspring.trip.entity.Trip;
-import org.example.sokhrabackendspring.trip.service.TripService;
-import org.example.sokhrabackendspring.user.entity.User;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;

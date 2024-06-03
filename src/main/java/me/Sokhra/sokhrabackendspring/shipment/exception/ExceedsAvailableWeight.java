@@ -1,4 +1,4 @@
-package org.example.sokhrabackendspring.shipment.exception;
+package me.Sokhra.sokhrabackendspring.shipment.exception;
 
 public class ExceedsAvailableWeight extends Exception {
   public ExceedsAvailableWeight() {

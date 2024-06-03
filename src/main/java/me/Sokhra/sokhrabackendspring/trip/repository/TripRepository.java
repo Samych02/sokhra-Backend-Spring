@@ -1,9 +1,9 @@
-package org.example.sokhrabackendspring.trip.repository;
+package me.Sokhra.sokhrabackendspring.trip.repository;
 
-import org.example.sokhrabackendspring.trip.entity.Trip;
-import org.example.sokhrabackendspring.trip.model.TripStatus;
-import org.example.sokhrabackendspring.trip.repository.projection.TripProjectionForMyTrips;
-import org.example.sokhrabackendspring.trip.repository.projection.TripProjectionForTripsListing;
+import me.Sokhra.sokhrabackendspring.trip.entity.Trip;
+import me.Sokhra.sokhrabackendspring.trip.model.TripStatus;
+import me.Sokhra.sokhrabackendspring.trip.repository.projection.TripProjectionForMyTrips;
+import me.Sokhra.sokhrabackendspring.trip.repository.projection.TripProjectionForTripsListing;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

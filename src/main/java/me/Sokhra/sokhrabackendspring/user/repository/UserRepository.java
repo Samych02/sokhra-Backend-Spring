@@ -1,8 +1,8 @@
-package org.example.sokhrabackendspring.user.repository;
+package me.Sokhra.sokhrabackendspring.user.repository;
 
-import org.example.sokhrabackendspring.user.entity.User;
-import org.example.sokhrabackendspring.user.repository.projection.ProfileProjection;
-import org.example.sokhrabackendspring.user.repository.projection.UserProfileProjection;
+import me.Sokhra.sokhrabackendspring.user.entity.User;
+import me.Sokhra.sokhrabackendspring.user.repository.projection.ProfileProjection;
+import me.Sokhra.sokhrabackendspring.user.repository.projection.UserProfileProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

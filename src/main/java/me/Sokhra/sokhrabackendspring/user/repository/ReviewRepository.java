@@ -1,7 +1,7 @@
-package org.example.sokhrabackendspring.user.repository;
+package me.Sokhra.sokhrabackendspring.user.repository;
 
-import org.example.sokhrabackendspring.user.entity.Review;
-import org.example.sokhrabackendspring.user.repository.projection.ReviewProjection;
+import me.Sokhra.sokhrabackendspring.user.entity.Review;
+import me.Sokhra.sokhrabackendspring.user.repository.projection.ReviewProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

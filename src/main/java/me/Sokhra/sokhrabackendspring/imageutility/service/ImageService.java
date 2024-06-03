@@ -1,4 +1,4 @@
-package org.example.sokhrabackendspring.imageutility.service;
+package me.Sokhra.sokhrabackendspring.imageutility.service;
 
 import lombok.Setter;
 import org.springframework.stereotype.Service;

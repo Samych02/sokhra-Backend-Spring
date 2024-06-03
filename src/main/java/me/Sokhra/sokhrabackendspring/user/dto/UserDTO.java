@@ -1,4 +1,4 @@
-package org.example.sokhrabackendspring.user.dto;
+package me.Sokhra.sokhrabackendspring.user.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

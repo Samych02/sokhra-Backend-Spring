@@ -1,6 +1,6 @@
-package org.example.sokhrabackendspring.user.repository.projection;
+package me.Sokhra.sokhrabackendspring.user.repository.projection;
 
-import org.example.sokhrabackendspring.user.model.Rating;
+import me.Sokhra.sokhrabackendspring.user.model.Rating;
 import org.springframework.beans.factory.annotation.Value;
 
 public interface UserProjection {

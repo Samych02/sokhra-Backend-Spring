@@ -1,7 +1,7 @@
-package org.example.sokhrabackendspring.imageutility.configuration;
+package me.Sokhra.sokhrabackendspring.imageutility.configuration;
 
 import lombok.RequiredArgsConstructor;
-import org.example.sokhrabackendspring.imageutility.service.ImageService;
+import me.Sokhra.sokhrabackendspring.imageutility.service.ImageService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

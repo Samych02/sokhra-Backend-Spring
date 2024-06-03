@@ -1,16 +1,16 @@
-package org.example.sokhrabackendspring.trip.service;
+package me.Sokhra.sokhrabackendspring.trip.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.sokhrabackendspring.shipment.entity.Shipment;
-import org.example.sokhrabackendspring.shipment.model.ShipmentStatus;
-import org.example.sokhrabackendspring.trip.dto.TripDTO;
-import org.example.sokhrabackendspring.trip.entity.Trip;
-import org.example.sokhrabackendspring.trip.exception.TripNotFoundException;
-import org.example.sokhrabackendspring.trip.model.TripStatus;
-import org.example.sokhrabackendspring.trip.repository.TripRepository;
-import org.example.sokhrabackendspring.trip.repository.projection.TripProjectionForMyTrips;
-import org.example.sokhrabackendspring.trip.repository.projection.TripProjectionForTripsListing;
-import org.example.sokhrabackendspring.user.entity.User;
+import me.Sokhra.sokhrabackendspring.shipment.entity.Shipment;
+import me.Sokhra.sokhrabackendspring.shipment.model.ShipmentStatus;
+import me.Sokhra.sokhrabackendspring.trip.dto.TripDTO;
+import me.Sokhra.sokhrabackendspring.trip.entity.Trip;
+import me.Sokhra.sokhrabackendspring.trip.exception.TripNotFoundException;
+import me.Sokhra.sokhrabackendspring.trip.model.TripStatus;
+import me.Sokhra.sokhrabackendspring.trip.repository.TripRepository;
+import me.Sokhra.sokhrabackendspring.trip.repository.projection.TripProjectionForMyTrips;
+import me.Sokhra.sokhrabackendspring.trip.repository.projection.TripProjectionForTripsListing;
+import me.Sokhra.sokhrabackendspring.user.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

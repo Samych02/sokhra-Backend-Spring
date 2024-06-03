@@ -1,4 +1,4 @@
-package org.example.sokhrabackendspring.common.entity;
+package me.Sokhra.sokhrabackendspring.common.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

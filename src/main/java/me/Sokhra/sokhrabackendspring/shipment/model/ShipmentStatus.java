@@ -1,4 +1,4 @@
-package org.example.sokhrabackendspring.shipment.model;
+package me.Sokhra.sokhrabackendspring.shipment.model;
 
 public enum ShipmentStatus {
   PENDING,

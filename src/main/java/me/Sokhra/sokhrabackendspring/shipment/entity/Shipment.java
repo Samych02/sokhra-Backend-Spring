@@ -1,12 +1,12 @@
-package org.example.sokhrabackendspring.shipment.entity;
+package me.Sokhra.sokhrabackendspring.shipment.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
-import org.example.sokhrabackendspring.common.entity.BaseEntity;
-import org.example.sokhrabackendspring.shipment.model.ShipmentStatus;
-import org.example.sokhrabackendspring.trip.entity.Trip;
-import org.example.sokhrabackendspring.user.entity.User;
+import me.Sokhra.sokhrabackendspring.common.entity.BaseEntity;
+import me.Sokhra.sokhrabackendspring.shipment.model.ShipmentStatus;
+import me.Sokhra.sokhrabackendspring.trip.entity.Trip;
+import me.Sokhra.sokhrabackendspring.user.entity.User;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;

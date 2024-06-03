@@ -1,10 +1,10 @@
-package org.example.sokhrabackendspring.user.controller;
+package me.Sokhra.sokhrabackendspring.user.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.example.sokhrabackendspring.requestresponse.util.ResponseUtil;
-import org.example.sokhrabackendspring.user.dto.UserDTO;
-import org.example.sokhrabackendspring.user.service.UserService;
+import me.Sokhra.sokhrabackendspring.requestresponse.util.ResponseUtil;
+import me.Sokhra.sokhrabackendspring.user.dto.UserDTO;
+import me.Sokhra.sokhrabackendspring.user.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

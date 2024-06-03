@@ -1,10 +1,10 @@
-package org.example.sokhrabackendspring.trip.dto;
+package me.Sokhra.sokhrabackendspring.trip.dto;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
-import org.example.sokhrabackendspring.trip.model.Place;
+import me.Sokhra.sokhrabackendspring.trip.model.Place;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;

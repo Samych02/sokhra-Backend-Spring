@@ -1,12 +1,12 @@
-package org.example.sokhrabackendspring.user.service;
+package me.Sokhra.sokhrabackendspring.user.service;
 
+import me.Sokhra.sokhrabackendspring.imageutility.service.ImageService;
+import me.Sokhra.sokhrabackendspring.user.dto.UserDTO;
+import me.Sokhra.sokhrabackendspring.user.entity.User;
+import me.Sokhra.sokhrabackendspring.user.repository.UserRepository;
+import me.Sokhra.sokhrabackendspring.user.repository.projection.ProfileProjection;
+import me.Sokhra.sokhrabackendspring.user.repository.projection.UserProfileProjection;
 import org.apache.commons.io.FilenameUtils;
-import org.example.sokhrabackendspring.imageutility.service.ImageService;
-import org.example.sokhrabackendspring.user.dto.UserDTO;
-import org.example.sokhrabackendspring.user.entity.User;
-import org.example.sokhrabackendspring.user.repository.UserRepository;
-import org.example.sokhrabackendspring.user.repository.projection.ProfileProjection;
-import org.example.sokhrabackendspring.user.repository.projection.UserProfileProjection;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;

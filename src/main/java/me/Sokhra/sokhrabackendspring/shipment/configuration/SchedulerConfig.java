@@ -1,4 +1,4 @@
-package org.example.sokhrabackendspring.shipment.configuration;
+package me.Sokhra.sokhrabackendspring.shipment.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;

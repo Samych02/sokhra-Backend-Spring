@@ -1,4 +1,4 @@
-package org.example.sokhrabackendspring.requestresponse.model;
+package me.Sokhra.sokhrabackendspring.requestresponse.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

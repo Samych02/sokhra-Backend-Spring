@@ -1,15 +1,15 @@
-package org.example.sokhrabackendspring.trip.controller;
+package me.Sokhra.sokhrabackendspring.trip.controller;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
-import org.example.sokhrabackendspring.requestresponse.util.ResponseUtil;
-import org.example.sokhrabackendspring.trip.dto.TripDTO;
-import org.example.sokhrabackendspring.trip.model.Place;
-import org.example.sokhrabackendspring.trip.model.TripStatus;
-import org.example.sokhrabackendspring.trip.repository.projection.TripProjectionForMyTrips;
-import org.example.sokhrabackendspring.trip.repository.projection.TripProjectionForTripsListing;
-import org.example.sokhrabackendspring.trip.service.TripService;
+import me.Sokhra.sokhrabackendspring.requestresponse.util.ResponseUtil;
+import me.Sokhra.sokhrabackendspring.trip.dto.TripDTO;
+import me.Sokhra.sokhrabackendspring.trip.model.Place;
+import me.Sokhra.sokhrabackendspring.trip.model.TripStatus;
+import me.Sokhra.sokhrabackendspring.trip.repository.projection.TripProjectionForMyTrips;
+import me.Sokhra.sokhrabackendspring.trip.repository.projection.TripProjectionForTripsListing;
+import me.Sokhra.sokhrabackendspring.trip.service.TripService;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;

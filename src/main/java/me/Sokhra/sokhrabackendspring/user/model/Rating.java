@@ -1,4 +1,4 @@
-package org.example.sokhrabackendspring.user.model;
+package me.Sokhra.sokhrabackendspring.user.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

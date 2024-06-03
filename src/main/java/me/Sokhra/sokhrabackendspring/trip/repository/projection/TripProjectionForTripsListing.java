@@ -1,8 +1,8 @@
-package org.example.sokhrabackendspring.trip.repository.projection;
+package me.Sokhra.sokhrabackendspring.trip.repository.projection;
 
-import org.example.sokhrabackendspring.trip.model.Place;
-import org.example.sokhrabackendspring.trip.model.TripStatus;
-import org.example.sokhrabackendspring.user.repository.projection.UserProjection;
+import me.Sokhra.sokhrabackendspring.trip.model.Place;
+import me.Sokhra.sokhrabackendspring.trip.model.TripStatus;
+import me.Sokhra.sokhrabackendspring.user.repository.projection.UserProjection;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.time.LocalDate;

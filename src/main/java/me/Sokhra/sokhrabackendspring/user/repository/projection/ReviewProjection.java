@@ -1,4 +1,4 @@
-package org.example.sokhrabackendspring.user.repository.projection;
+package me.Sokhra.sokhrabackendspring.user.repository.projection;
 
 import java.time.LocalDateTime;
 

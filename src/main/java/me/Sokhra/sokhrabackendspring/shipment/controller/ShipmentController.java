@@ -1,10 +1,10 @@
-package org.example.sokhrabackendspring.shipment.controller;
+package me.Sokhra.sokhrabackendspring.shipment.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.example.sokhrabackendspring.requestresponse.util.ResponseUtil;
-import org.example.sokhrabackendspring.shipment.dto.ShipmentDTO;
-import org.example.sokhrabackendspring.shipment.service.ShipmentService;
+import me.Sokhra.sokhrabackendspring.requestresponse.util.ResponseUtil;
+import me.Sokhra.sokhrabackendspring.shipment.dto.ShipmentDTO;
+import me.Sokhra.sokhrabackendspring.shipment.service.ShipmentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

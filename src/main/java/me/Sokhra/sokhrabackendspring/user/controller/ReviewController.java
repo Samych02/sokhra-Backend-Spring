@@ -1,11 +1,11 @@
-package org.example.sokhrabackendspring.user.controller;
+package me.Sokhra.sokhrabackendspring.user.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.example.sokhrabackendspring.requestresponse.util.ResponseUtil;
-import org.example.sokhrabackendspring.user.dto.ReviewDTO;
-import org.example.sokhrabackendspring.user.repository.projection.ReviewProjection;
-import org.example.sokhrabackendspring.user.service.ReviewService;
+import me.Sokhra.sokhrabackendspring.requestresponse.util.ResponseUtil;
+import me.Sokhra.sokhrabackendspring.user.dto.ReviewDTO;
+import me.Sokhra.sokhrabackendspring.user.repository.projection.ReviewProjection;
+import me.Sokhra.sokhrabackendspring.user.service.ReviewService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

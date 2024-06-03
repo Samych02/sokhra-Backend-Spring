@@ -1,8 +1,8 @@
-package org.example.sokhrabackendspring.user.entity;
+package me.Sokhra.sokhrabackendspring.user.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.example.sokhrabackendspring.common.entity.BaseEntity;
+import me.Sokhra.sokhrabackendspring.common.entity.BaseEntity;
 
 import java.util.UUID;
 

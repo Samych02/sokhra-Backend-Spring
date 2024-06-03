@@ -1,11 +1,11 @@
-package org.example.sokhrabackendspring.shipment.dto;
+package me.Sokhra.sokhrabackendspring.shipment.dto;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
-import org.example.sokhrabackendspring.shipment.validator.weightwithinlimitvalidator.WeightWithinLimit;
+import me.Sokhra.sokhrabackendspring.shipment.validator.weightwithinlimitvalidator.WeightWithinLimit;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;

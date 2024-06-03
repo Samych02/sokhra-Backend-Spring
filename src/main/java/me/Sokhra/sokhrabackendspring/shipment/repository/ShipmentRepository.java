@@ -1,7 +1,7 @@
-package org.example.sokhrabackendspring.shipment.repository;
+package me.Sokhra.sokhrabackendspring.shipment.repository;
 
-import org.example.sokhrabackendspring.shipment.entity.Shipment;
-import org.example.sokhrabackendspring.shipment.model.ShipmentStatus;
+import me.Sokhra.sokhrabackendspring.shipment.entity.Shipment;
+import me.Sokhra.sokhrabackendspring.shipment.model.ShipmentStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

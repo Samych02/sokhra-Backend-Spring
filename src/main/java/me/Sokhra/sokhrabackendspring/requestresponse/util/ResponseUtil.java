@@ -1,6 +1,6 @@
-package org.example.sokhrabackendspring.requestresponse.util;
+package me.Sokhra.sokhrabackendspring.requestresponse.util;
 
-import org.example.sokhrabackendspring.requestresponse.model.StandardResponse;
+import me.Sokhra.sokhrabackendspring.requestresponse.model.StandardResponse;
 
 public class ResponseUtil {
   public static <T> StandardResponse.SuccessResponse<T> successResponse(String message, T data) {

@@ -1,12 +1,12 @@
-package org.example.sokhrabackendspring.user.service;
+package me.Sokhra.sokhrabackendspring.user.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.sokhrabackendspring.user.dto.ReviewDTO;
-import org.example.sokhrabackendspring.user.entity.Review;
-import org.example.sokhrabackendspring.user.entity.User;
-import org.example.sokhrabackendspring.user.model.Rating;
-import org.example.sokhrabackendspring.user.repository.ReviewRepository;
-import org.example.sokhrabackendspring.user.repository.projection.ReviewProjection;
+import me.Sokhra.sokhrabackendspring.user.dto.ReviewDTO;
+import me.Sokhra.sokhrabackendspring.user.entity.Review;
+import me.Sokhra.sokhrabackendspring.user.entity.User;
+import me.Sokhra.sokhrabackendspring.user.model.Rating;
+import me.Sokhra.sokhrabackendspring.user.repository.ReviewRepository;
+import me.Sokhra.sokhrabackendspring.user.repository.projection.ReviewProjection;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 

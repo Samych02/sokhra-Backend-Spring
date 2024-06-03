@@ -1,4 +1,4 @@
-package org.example.sokhrabackendspring.trip.model;
+package me.Sokhra.sokhrabackendspring.trip.model;
 
 public enum TripStatus {
   ACTIVE,

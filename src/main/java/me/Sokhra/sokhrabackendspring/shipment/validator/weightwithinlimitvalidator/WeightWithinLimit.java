@@ -1,4 +1,4 @@
-package org.example.sokhrabackendspring.shipment.validator.weightwithinlimitvalidator;
+package me.Sokhra.sokhrabackendspring.shipment.validator.weightwithinlimitvalidator;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
