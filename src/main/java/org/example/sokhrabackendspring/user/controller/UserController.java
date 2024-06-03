@@ -64,4 +64,16 @@ public class UserController {
                     )
             );
   }
+
+  @GetMapping(value = "/user/profile/home")
+  public ResponseEntity<?> getProfileForHome(@AuthenticationPrincipal Jwt token) {
+    return ResponseEntity
+            .status(HttpStatus.CREATED)
+            .body(
+                    ResponseUtil.successResponse(
+                            "User profile fetched successfully",
+                            Collections.singletonMap("profile", userService.getProfileForHome(token))
+                    )
+            );
+  }
 }

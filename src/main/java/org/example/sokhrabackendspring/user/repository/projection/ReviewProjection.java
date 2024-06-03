@@ -3,7 +3,7 @@ package org.example.sokhrabackendspring.user.repository.projection;
 import java.time.LocalDateTime;
 
 public interface ReviewProjection {
-  ReviewerProjection getCaster();
+  ProfileProjection getCaster();
 
   Integer getRating();
 

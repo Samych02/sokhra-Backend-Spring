@@ -5,5 +5,4 @@ public enum ShipmentStatus {
   ACCEPTED,
   REJECTED,
   DELIVERED,
-  CANCELLED,
 }

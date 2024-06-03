@@ -5,6 +5,7 @@ import org.example.sokhrabackendspring.imageutility.service.ImageService;
 import org.example.sokhrabackendspring.user.dto.UserDTO;
 import org.example.sokhrabackendspring.user.entity.User;
 import org.example.sokhrabackendspring.user.repository.UserRepository;
+import org.example.sokhrabackendspring.user.repository.projection.ProfileProjection;
 import org.example.sokhrabackendspring.user.repository.projection.UserProfileProjection;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -59,5 +60,7 @@ public class UserService {
     return userRepository.findUserProjectedById(id);
   }
 
-
+  public ProfileProjection getProfileForHome(Jwt token) {
+    return userRepository.findProfileProjectedById(token.getClaim("user_id"));
+  }
 }

@@ -8,7 +8,8 @@ import org.example.sokhrabackendspring.trip.entity.Trip;
 import org.example.sokhrabackendspring.trip.exception.TripNotFoundException;
 import org.example.sokhrabackendspring.trip.model.TripStatus;
 import org.example.sokhrabackendspring.trip.repository.TripRepository;
-import org.example.sokhrabackendspring.trip.repository.projection.TripProjection;
+import org.example.sokhrabackendspring.trip.repository.projection.TripProjectionForMyTrips;
+import org.example.sokhrabackendspring.trip.repository.projection.TripProjectionForTripsListing;
 import org.example.sokhrabackendspring.user.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +19,7 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.web.access.WebInvocationPrivilegeEvaluator;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -60,13 +62,13 @@ public class TripService {
     return getAvailableWeight(id) >= requestedWeight;
   }
 
-  public Page<TripProjection> getTripsPaginated(int page, int size, TripDTO.GetTripsDTO getTripsDTO) {
+  public Page<TripProjectionForTripsListing> getTripsPaginated(int page, int size, TripDTO.GetTripsDTO getTripsDTO) {
     Pageable pageable;
     if (getTripsDTO == null || getTripsDTO.areAllFieldsNull()) {
-      pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
+      pageable = PageRequest.of(page, size, Sort.by("departureDate").ascending());
       return tripRepository.findAllByStatus(TripStatus.ACTIVE, pageable);
     }
-    pageable = PageRequest.of(page, size, Sort.by("price").ascending());
+    pageable = PageRequest.of(page, size, Sort.by(((getTripsDTO.getDepartureDate() == null) ? "departureDate" : "price")).ascending());
     return tripRepository.findAllBy((getTripsDTO.getOrigin().getCity() == null) ? null : getTripsDTO.getOrigin().getCity().toLowerCase(), (getTripsDTO.getOrigin().getCity() == null) ? null : getTripsDTO.getOrigin().getCountry().toLowerCase(),
             (getTripsDTO.getDestination().getCity() == null) ? null : getTripsDTO.getDestination().getCity().toLowerCase(), (getTripsDTO.getDestination().getCity() == null) ? null : getTripsDTO.getDestination().getCountry().toLowerCase(),
             (getTripsDTO.getDepartureDate() == null) ? null : getTripsDTO.getDepartureDate(),
@@ -77,6 +79,10 @@ public class TripService {
 
   public Integer getTripsCountByUserId(String id) {
     return tripRepository.countAllByTravellerIdAndStatus(id, TripStatus.COMPLETED);
+  }
+
+  public List<TripProjectionForMyTrips> getAllMyTrips(Jwt token, TripStatus status) {
+    return tripRepository.findAllByTravellerIdAndStatusOrderByDepartureDateAsc(token.getClaim("user_id"), status);
   }
 
 // Freely editing a trip is the ability to totally edit a trip weight and price tp any value

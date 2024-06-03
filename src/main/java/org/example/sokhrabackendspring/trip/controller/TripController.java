@@ -6,7 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.example.sokhrabackendspring.requestresponse.util.ResponseUtil;
 import org.example.sokhrabackendspring.trip.dto.TripDTO;
 import org.example.sokhrabackendspring.trip.model.Place;
-import org.example.sokhrabackendspring.trip.repository.projection.TripProjection;
+import org.example.sokhrabackendspring.trip.model.TripStatus;
+import org.example.sokhrabackendspring.trip.repository.projection.TripProjectionForMyTrips;
+import org.example.sokhrabackendspring.trip.repository.projection.TripProjectionForTripsListing;
 import org.example.sokhrabackendspring.trip.service.TripService;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -46,16 +49,14 @@ public class TripController {
                                        @RequestParam(required = false) String destinationCity,
                                        @RequestParam(required = false) String destinationCountry,
                                        @RequestParam(required = false) @DateTimeFormat LocalDate departureDate,
-                                       @RequestParam(required = false) @Min(1) Integer weight
-  )
-          throws Exception {
+                                       @RequestParam(required = false) @Min(1) Integer weight) {
     TripDTO.GetTripsDTO getTripsDTO = TripDTO.GetTripsDTO.builder()
             .origin(new Place(originCity, originCountry))
             .destination(new Place(destinationCity, destinationCountry))
             .departureDate(departureDate)
             .weight(weight)
             .build();
-    Page<TripProjection> tripPage = tripService.getTripsPaginated(page, size, getTripsDTO);
+    Page<TripProjectionForTripsListing> tripPage = tripService.getTripsPaginated(page, size, getTripsDTO);
     return ResponseEntity
             .status(HttpStatus.OK)
             .body(
@@ -64,5 +65,19 @@ public class TripController {
                             Collections.singletonMap("tripPage", tripPage)
                     )
             );
+  }
+
+  @GetMapping("/trips/my")
+  public ResponseEntity<?> getMyTrips(@AuthenticationPrincipal Jwt token, @RequestParam TripStatus status) {
+    List<TripProjectionForMyTrips> tripList = tripService.getAllMyTrips(token, status);
+    return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(
+                    ResponseUtil.successResponse(
+                            "My trips fetched successfully",
+                            Collections.singletonMap("tripList", tripList)
+                    )
+            );
+
   }
 }

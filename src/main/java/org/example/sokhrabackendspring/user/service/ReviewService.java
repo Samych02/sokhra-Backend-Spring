@@ -37,4 +37,5 @@ public class ReviewService {
   public List<ReviewProjection> getAllUserReviews(String userId) {
     return reviewRepository.findAllProjectedByReviewedId(userId);
   }
+
 }
