@@ -8,7 +8,7 @@
         <version>3.2.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>org.example</groupId>
+    <groupId>me.sokhra</groupId>
     <artifactId>sokhra-Backend-Spring</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>sokhra-Backend-Spring</name>
