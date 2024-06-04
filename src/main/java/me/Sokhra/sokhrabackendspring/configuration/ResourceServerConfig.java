@@ -15,6 +15,7 @@ public class ResourceServerConfig {
     http
             .authorizeHttpRequests(authorize -> authorize
                     .requestMatchers("/user/profile/image/**").permitAll()
+                    .requestMatchers("/shipment/image/**").permitAll()
                     .anyRequest().authenticated()
             )
             .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()));

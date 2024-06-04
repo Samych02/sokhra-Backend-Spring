@@ -7,7 +7,6 @@ import me.Sokhra.sokhrabackendspring.common.entity.BaseEntity;
 import me.Sokhra.sokhrabackendspring.shipment.model.ShipmentStatus;
 import me.Sokhra.sokhrabackendspring.trip.entity.Trip;
 import me.Sokhra.sokhrabackendspring.user.entity.User;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -39,10 +38,6 @@ public class Shipment extends BaseEntity {
 
   @Enumerated(EnumType.STRING)
   private ShipmentStatus status;
-
-  @CreatedDate
-  @Column(name = "created_at")
-  private LocalDateTime createdAt;
 
   public Shipment(UUID id) {
     super(id);

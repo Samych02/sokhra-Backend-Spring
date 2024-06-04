@@ -42,4 +42,6 @@ public interface TripRepository extends JpaRepository<Trip, UUID>, JpaSpecificat
   Integer countAllByTravellerIdAndStatus(String id, TripStatus status);
 
   List<TripProjectionForMyTrips> findAllByTravellerIdAndStatusOrderByDepartureDateAsc(String id, TripStatus status);
+
+  Trip getTripById(UUID id);
 }

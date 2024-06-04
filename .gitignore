@@ -33,5 +33,5 @@ build/
 .vscode/
 
 /src/main/resources/firebase-adminsdk.json
-/src/main/resources/static
-/src/main/resources/data.sql
+/src/main/resources/sokhra.jks
+

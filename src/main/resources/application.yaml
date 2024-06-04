@@ -28,6 +28,13 @@ spring:
       max-file-size: 10MB
       max-request-size: 10MB
 
+#server:
+#  ssl:
+#    key-store: classpath:sokhra.jks
+#    key-store-password: sokhra
+#    key-alias: sokhra
+#  port: 443
+
 profile-picture-directory: /Users/samy/Documents/Projects/sokhra-UsersResources/profile-picture/
 shipment-picture-directory: /Users/samy/Documents/Projects/sokhra-UsersResources/shipment-picture/
 
