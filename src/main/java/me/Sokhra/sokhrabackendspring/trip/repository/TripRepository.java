@@ -1,8 +1,10 @@
 package me.Sokhra.sokhrabackendspring.trip.repository;
 
+import me.Sokhra.sokhrabackendspring.shipment.model.ShipmentStatus;
 import me.Sokhra.sokhrabackendspring.trip.entity.Trip;
 import me.Sokhra.sokhrabackendspring.trip.model.TripStatus;
 import me.Sokhra.sokhrabackendspring.trip.repository.projection.TripProjectionForMyTrips;
+import me.Sokhra.sokhrabackendspring.trip.repository.projection.TripProjectionForShipments;
 import me.Sokhra.sokhrabackendspring.trip.repository.projection.TripProjectionForTripsListing;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -44,4 +46,6 @@ public interface TripRepository extends JpaRepository<Trip, UUID>, JpaSpecificat
   List<TripProjectionForMyTrips> findAllByTravellerIdAndStatusOrderByDepartureDateAsc(String id, TripStatus status);
 
   Trip getTripById(UUID id);
+
+  List<TripProjectionForShipments> getShipmentsByIdAndShipmentsStatusOrderByCreatedAtAsc(UUID id, ShipmentStatus shipmentStatus);
 }

@@ -2,7 +2,6 @@ package me.Sokhra.sokhrabackendspring.shipment.repository;
 
 import me.Sokhra.sokhrabackendspring.shipment.entity.Shipment;
 import me.Sokhra.sokhrabackendspring.shipment.model.ShipmentStatus;
-import me.Sokhra.sokhrabackendspring.shipment.repository.projection.ShipmentProjectionForTrip;
 import me.Sokhra.sokhrabackendspring.shipment.repository.projection.ShipmentProjectionForUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,8 +17,6 @@ public interface ShipmentRepository extends JpaRepository<Shipment, UUID> {
   String getShipmentPictureById(@Param("id") UUID id);
 
   Integer countAllBySenderIdAndStatus(String id, ShipmentStatus status);
-
-  List<ShipmentProjectionForTrip> findAllProjectedByTripIdAndStatusOrderByCreatedAtAsc(UUID id, ShipmentStatus status);
 
   List<ShipmentProjectionForUser> findAllProjectedBySenderIdAndStatusOrderByTripDepartureDateAsc(String id, ShipmentStatus status);
 }

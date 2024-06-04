@@ -19,7 +19,7 @@ import java.util.UUID;
 @Table(name = "shipments")
 @Builder
 public class Shipment extends BaseEntity {
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(nullable = false)
   private User sender;
 

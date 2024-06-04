@@ -5,9 +5,9 @@ import lombok.RequiredArgsConstructor;
 import me.Sokhra.sokhrabackendspring.requestresponse.util.ResponseUtil;
 import me.Sokhra.sokhrabackendspring.shipment.dto.ShipmentDTO;
 import me.Sokhra.sokhrabackendspring.shipment.model.ShipmentStatus;
-import me.Sokhra.sokhrabackendspring.shipment.repository.projection.ShipmentProjectionForTrip;
 import me.Sokhra.sokhrabackendspring.shipment.repository.projection.ShipmentProjectionForUser;
 import me.Sokhra.sokhrabackendspring.shipment.service.ShipmentService;
+import me.Sokhra.sokhrabackendspring.trip.repository.projection.TripProjectionForShipments;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -111,9 +111,9 @@ public class ShipmentController {
             );
   }
 
-  @GetMapping("/trip/shiments")
+  @GetMapping("/trip/shipments")
   public ResponseEntity<?> getTripShipments(@RequestParam UUID id, @RequestParam ShipmentStatus status) {
-    List<ShipmentProjectionForTrip> shipmentList = shipmentService.getTripShipments(id, status);
+    List<TripProjectionForShipments> shipmentList = shipmentService.getTripShipments(id, status);
     return ResponseEntity
             .status(HttpStatus.OK)
             .body(

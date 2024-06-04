@@ -6,10 +6,10 @@ import me.Sokhra.sokhrabackendspring.shipment.dto.ShipmentDTO;
 import me.Sokhra.sokhrabackendspring.shipment.entity.Shipment;
 import me.Sokhra.sokhrabackendspring.shipment.model.ShipmentStatus;
 import me.Sokhra.sokhrabackendspring.shipment.repository.ShipmentRepository;
-import me.Sokhra.sokhrabackendspring.shipment.repository.projection.ShipmentProjectionForTrip;
 import me.Sokhra.sokhrabackendspring.shipment.repository.projection.ShipmentProjectionForUser;
 import me.Sokhra.sokhrabackendspring.trip.entity.Trip;
-import me.Sokhra.sokhrabackendspring.trip.service.TripService;
+import me.Sokhra.sokhrabackendspring.trip.repository.TripRepository;
+import me.Sokhra.sokhrabackendspring.trip.repository.projection.TripProjectionForShipments;
 import me.Sokhra.sokhrabackendspring.user.entity.User;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,10 +27,12 @@ import java.util.UUID;
 public class ShipmentService {
   private final ShipmentRepository shipmentRepository;
   private final ImageService imageService;
+  private final TripRepository tripRepository;
 
-  public ShipmentService(ShipmentRepository shipmentRepository, @Qualifier("shipmentImageService") ImageService imageService, TripService tripService) {
+  public ShipmentService(ShipmentRepository shipmentRepository, @Qualifier("shipmentImageService") ImageService imageService, TripRepository tripRepository) {
     this.shipmentRepository = shipmentRepository;
     this.imageService = imageService;
+    this.tripRepository = tripRepository;
   }
 
   public byte[] getShipmentPicture(UUID id) throws IOException {
@@ -81,7 +83,7 @@ public class ShipmentService {
     return shipmentRepository.findAllProjectedBySenderIdAndStatusOrderByTripDepartureDateAsc(token.getClaim("user_id"), shipmentStatus);
   }
 
-  public List<ShipmentProjectionForTrip> getTripShipments(UUID id, @RequestParam ShipmentStatus shipmentStatus) {
-    return shipmentRepository.findAllProjectedByTripIdAndStatusOrderByCreatedAtAsc(id, shipmentStatus);
+  public List<TripProjectionForShipments> getTripShipments(UUID id, @RequestParam ShipmentStatus shipmentStatus) {
+    return tripRepository.getShipmentsByIdAndShipmentsStatusOrderByCreatedAtAsc(id, shipmentStatus);
   }
 }
