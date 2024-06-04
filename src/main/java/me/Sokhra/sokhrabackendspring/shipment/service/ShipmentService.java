@@ -6,6 +6,8 @@ import me.Sokhra.sokhrabackendspring.shipment.dto.ShipmentDTO;
 import me.Sokhra.sokhrabackendspring.shipment.entity.Shipment;
 import me.Sokhra.sokhrabackendspring.shipment.model.ShipmentStatus;
 import me.Sokhra.sokhrabackendspring.shipment.repository.ShipmentRepository;
+import me.Sokhra.sokhrabackendspring.shipment.repository.projection.ShipmentProjectionForTrip;
+import me.Sokhra.sokhrabackendspring.shipment.repository.projection.ShipmentProjectionForUser;
 import me.Sokhra.sokhrabackendspring.trip.entity.Trip;
 import me.Sokhra.sokhrabackendspring.trip.service.TripService;
 import me.Sokhra.sokhrabackendspring.user.entity.User;
@@ -13,9 +15,11 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -44,8 +48,6 @@ public class ShipmentService {
 
   @SneakyThrows
   public void addShipment(Jwt token, ShipmentDTO.AddShipmentDTO addShipmentDTO) {
-//    if (!tripService.canAcceptTrip(addShipmentDTO.getTripID(), addShipmentDTO.getWeight()))
-//      throw new ExceedsAvailableWeight();
     User sender = new User(token.getClaim("user_id"));
     Trip trip = new Trip(addShipmentDTO.getTripID());
 
@@ -56,5 +58,30 @@ public class ShipmentService {
 
   public Integer getShipmentsCountByUserId(String id) {
     return shipmentRepository.countAllBySenderIdAndStatus(id, ShipmentStatus.DELIVERED);
+  }
+
+  public void editShipmentById(UUID id, ShipmentStatus shipmentStatus) {
+    Shipment shipment = shipmentRepository.findById(id).orElse(null);
+    if (shipment != null) {
+      shipment.setStatus(shipmentStatus);
+      shipmentRepository.save(shipment);
+    }
+  }
+
+  public void deleteShipmentById(UUID id) {
+    shipmentRepository.deleteById(id);
+  }
+
+  public byte[] getProfilePicture(UUID id) throws IOException {
+    String profilePicture = shipmentRepository.getShipmentPictureById(id);
+    return imageService.loadImage(profilePicture);
+  }
+
+  public List<ShipmentProjectionForUser> getAllMyShipments(Jwt token, @RequestParam ShipmentStatus shipmentStatus) {
+    return shipmentRepository.findAllProjectedBySenderIdAndStatusOrderByTripDepartureDateAsc(token.getClaim("user_id"), shipmentStatus);
+  }
+
+  public List<ShipmentProjectionForTrip> getTripShipments(UUID id, @RequestParam ShipmentStatus shipmentStatus) {
+    return shipmentRepository.findAllProjectedByTripIdAndStatusOrderByCreatedAtAsc(id, shipmentStatus);
   }
 }
