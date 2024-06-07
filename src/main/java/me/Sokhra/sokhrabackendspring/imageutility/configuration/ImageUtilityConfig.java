@@ -23,6 +23,4 @@ public class ImageUtilityConfig {
     imageService.setPictureDirectory(directory);
     return imageService;
   }
-
-
 }

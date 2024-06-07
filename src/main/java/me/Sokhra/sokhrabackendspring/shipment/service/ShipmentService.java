@@ -62,7 +62,8 @@ public class ShipmentService {
     return shipmentRepository.countAllBySenderIdAndStatus(id, ShipmentStatus.DELIVERED);
   }
 
-  public void editShipmentById(UUID id, ShipmentStatus shipmentStatus) {
+  //todo: mark trip as completed when all its shipments are delivered
+  public void editShipmentStatus(UUID id, ShipmentStatus shipmentStatus) {
     Shipment shipment = shipmentRepository.findById(id).orElse(null);
     if (shipment != null) {
       shipment.setStatus(shipmentStatus);

@@ -41,7 +41,7 @@ public class ShipmentController {
 
   @PutMapping("/shipment/accept")
   public ResponseEntity<?> acceptShipment(@RequestBody @Valid ShipmentDTO.EditShipmentDTO editShipmentDTO) {
-    shipmentService.editShipmentById(editShipmentDTO.getShipmentId(), ShipmentStatus.ACCEPTED);
+    shipmentService.editShipmentStatus(editShipmentDTO.getShipmentId(), ShipmentStatus.ACCEPTED);
     return ResponseEntity
             .status(HttpStatus.OK)
             .body(
@@ -54,7 +54,7 @@ public class ShipmentController {
 
   @PutMapping("/shipment/reject")
   public ResponseEntity<?> rejectShipment(@RequestBody @Valid ShipmentDTO.EditShipmentDTO editShipmentDTO) {
-    shipmentService.editShipmentById(editShipmentDTO.getShipmentId(), ShipmentStatus.REJECTED);
+    shipmentService.editShipmentStatus(editShipmentDTO.getShipmentId(), ShipmentStatus.REJECTED);
     return ResponseEntity
             .status(HttpStatus.OK)
             .body(
@@ -67,7 +67,7 @@ public class ShipmentController {
 
   @PutMapping("/shipment/deliver")
   public ResponseEntity<?> deliverShipment(@RequestBody @Valid ShipmentDTO.EditShipmentDTO editShipmentDTO) {
-    shipmentService.editShipmentById(editShipmentDTO.getShipmentId(), ShipmentStatus.DELIVERED);
+    shipmentService.editShipmentStatus(editShipmentDTO.getShipmentId(), ShipmentStatus.DELIVERED);
     return ResponseEntity
             .status(HttpStatus.OK)
             .body(

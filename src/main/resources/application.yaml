@@ -30,11 +30,11 @@ spring:
 
 #server:
 #  ssl:
-#    key-store: classpath:sokhra.jks
-#    key-store-password: sokhra
-#    key-alias: sokhra
+#    key-store: classpath:key-store.jks
+#    key-store-password: password
+#    key-alias: alias
 #  port: 443
 
-profile-picture-directory: /Users/samy/Documents/Projects/sokhra-UsersResources/profile-picture/
-shipment-picture-directory: /Users/samy/Documents/Projects/sokhra-UsersResources/shipment-picture/
+profile-picture-directory: sokhra-UsersResources/profile-picture/
+shipment-picture-directory: sokhra-UsersResources/shipment-picture/
 
