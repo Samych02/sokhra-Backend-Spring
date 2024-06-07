@@ -10,7 +10,7 @@
     </parent>
     <groupId>me.sokhra</groupId>
     <artifactId>sokhra-backend-spring</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>sokhra-Backend-Spring</name>
     <description>sokhra-Backend-Spring</description>
     <properties>
